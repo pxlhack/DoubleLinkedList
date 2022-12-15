@@ -5,15 +5,21 @@ package com;
 // remove
 
 
+import java.util.LinkedList;
+
 public class DoubleLinkedList<E> {
+    private int size;
+
     public DoubleLinkedList() {
         this.head = null;
+        size = 0;
     }
 
     public void pushBack(E data) {
 
         if (head == null) {
             head = new Node<>(data);
+            size = 1;
         } else {
             Node tmp = this.head;
             while (tmp.next != null) {
@@ -22,8 +28,8 @@ public class DoubleLinkedList<E> {
 
             tmp.next = new Node<>(data);
             tmp.next.prev = tmp;
+            size++;
         }
-
 
     }
 
@@ -39,7 +45,46 @@ public class DoubleLinkedList<E> {
     }
 
     public E popBack() {
-        return null;
+        Node tmp = head;
+        E data = null;
+        if (tmp != null) {
+            while (tmp.next != null) {
+                tmp = tmp.next;
+            }
+            data = (E) tmp.data;
+            unlink(tmp);
+        }
+        return data;
+    }
+
+    public E popFront() {
+        Node tmp = head;
+        E data = null;
+        if (tmp != null) {
+            data = (E) tmp.data;
+            unlink(tmp);
+        }
+        return data;
+    }
+
+    private void unlink(Node x) {
+        final Node<E> next = x.next;
+        final Node<E> prev = x.prev;
+
+        if (prev == null) {
+            head = next;
+        } else {
+            prev.next = next;
+            x.prev = null;
+        }
+
+        if (next != null) {
+            next.prev = prev;
+            x.next = null;
+        }
+
+        x.data = null;
+        size--;
     }
 
     private class Node<E> {
@@ -61,11 +106,14 @@ public class DoubleLinkedList<E> {
     public String toString() {
         String listString = "[";
         Node tmp = head;
-        while (tmp.next != null) {
-            listString += tmp.data + ", ";
-            tmp = tmp.next;
+        if (tmp != null) {
+            while (tmp.next != null) {
+                listString += tmp.data + ", ";
+                tmp = tmp.next;
+            }
+            listString += tmp.data;
         }
-        listString += tmp.data + "]";
+        listString += "]";
         return listString;
     }
 }

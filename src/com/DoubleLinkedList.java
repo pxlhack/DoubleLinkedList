@@ -1,6 +1,6 @@
 package com;
 
-public class DoubleLinkedList<E> {
+public class DoubleLinkedList<E extends Comparable> {
     private int size;
     private Node<E> head;
 
@@ -130,6 +130,10 @@ public class DoubleLinkedList<E> {
         }
     }
 
+    public Itr<E> iterator() {
+        return new Itr<>();
+    }
+
     private void unlink(Node x) {
         final Node<E> next = x.next;
         final Node<E> prev = x.prev;
@@ -160,6 +164,59 @@ public class DoubleLinkedList<E> {
             this.prev = null;
             this.next = null;
         }
+
+    }
+
+    private class Itr<E extends Comparable> implements IteratorFace {
+        private Node current;
+
+        public Itr() {
+            current = head;
+        }
+
+        public void first() {
+            current = head;
+        }
+
+        public void last() {
+            Node tmp = current;
+            while (tmp.next != null) {
+                tmp = tmp.next;
+            }
+            current = tmp;
+        }
+
+        @Override
+        public boolean valid() {
+            return current != null;
+        }
+
+        public boolean next() {
+            if (current == null) {
+                return false;
+            }
+            current = current.next;
+            return current != null;
+        }
+
+        @Override
+        public boolean prev() {
+            if (current == null) {
+                return false;
+            }
+            current = current.prev;
+            return current != null;
+        }
+
+        @Override
+        public boolean equals(IteratorFace two) {
+            return current == ((Itr) two).current;
+        }
+
+        public E get() {
+            return current == null ? null : (E) current.data;
+        }
+
 
     }
 

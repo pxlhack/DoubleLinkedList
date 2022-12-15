@@ -1,14 +1,8 @@
 package com;
 
-
-//add
-// remove
-
-
-import java.util.LinkedList;
-
 public class DoubleLinkedList<E> {
     private int size;
+    private Node<E> head;
 
     public DoubleLinkedList() {
         this.head = null;
@@ -78,27 +72,6 @@ public class DoubleLinkedList<E> {
         }
     }
 
-    public E remove(int index) {
-        if (index == 0) {
-            return popFront();
-        }
-        if (index == size - 1) {
-            return popBack();
-        }
-
-        if (index > 0 && index < size - 1) {
-
-            Node removedNode = head;
-            for (int i = 0; i < index; i++) {
-                removedNode = removedNode.next;
-            }
-            E data = (E) removedNode.data;
-            unlink(removedNode);
-            return data;
-        }
-        return null;
-    }
-
     public E popBack() {
         Node tmp = head;
         E data = null;
@@ -120,6 +93,41 @@ public class DoubleLinkedList<E> {
             unlink(tmp);
         }
         return data;
+    }
+
+    public E remove(int index) {
+        if (index == 0) {
+            return popFront();
+        }
+        if (index == size - 1) {
+            return popBack();
+        }
+
+        if (index > 0 && index < size - 1) {
+
+            Node removedNode = head;
+            for (int i = 0; i < index; i++) {
+                removedNode = removedNode.next;
+            }
+            E data = (E) removedNode.data;
+            unlink(removedNode);
+            return data;
+        }
+        return null;
+    }
+
+    public void set(int index, E newData) {
+        if (index == 0) {
+            head.data = newData;
+        } else {
+            if (index > 0 && index < size) {
+                Node tmp = head;
+                for (int i = 0; i < index; i++) {
+                    tmp = tmp.next;
+                }
+                tmp.data = newData;
+            }
+        }
     }
 
     private void unlink(Node x) {
@@ -154,8 +162,6 @@ public class DoubleLinkedList<E> {
         }
 
     }
-
-    private Node<E> head;
 
     @Override
     public String toString() {

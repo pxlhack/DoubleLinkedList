@@ -31,16 +31,50 @@ public class DoubleLinkedList<E> {
             size++;
         }
 
+
     }
 
     public void pushFront(E data) {
         if (head == null) {
             head = new Node<>(data);
+            size = 1;
         } else {
             Node tmp = this.head;
             head = new Node<>(data);
             head.next = tmp;
             tmp.prev = head;
+            size++;
+        }
+    }
+
+    public void add(int index, E data) {
+
+
+        if (index == 0) {
+            pushFront(data);
+            return;
+        }
+        if (index == size) {
+            pushBack(data);
+            return;
+        }
+
+        if (index > 0 && index < size) {
+
+            Node prevNode = head;
+            for (int i = 0; i < index - 1; i++) {
+                prevNode = prevNode.next;
+            }
+
+
+            Node newNode = new Node<>(data);
+            Node nextNode = prevNode.next;
+            prevNode.next = newNode;
+            newNode.prev = prevNode;
+            newNode.next = nextNode;
+            nextNode.prev = newNode;
+            size++;
+
         }
     }
 

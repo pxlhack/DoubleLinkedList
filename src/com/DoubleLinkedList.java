@@ -78,6 +78,27 @@ public class DoubleLinkedList<E> {
         }
     }
 
+    public E remove(int index) {
+        if (index == 0) {
+            return popFront();
+        }
+        if (index == size - 1) {
+            return popBack();
+        }
+
+        if (index > 0 && index < size - 1) {
+
+            Node removedNode = head;
+            for (int i = 0; i < index; i++) {
+                removedNode = removedNode.next;
+            }
+            E data = (E) removedNode.data;
+            unlink(removedNode);
+            return data;
+        }
+        return null;
+    }
+
     public E popBack() {
         Node tmp = head;
         E data = null;

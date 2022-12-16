@@ -9,6 +9,8 @@ public interface IteratorFace<E extends Comparable> {
 
     public E get();
 
+    public boolean byIndex(int index);
+
     public boolean next();
 
     public boolean prev();

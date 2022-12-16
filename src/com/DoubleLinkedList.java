@@ -174,10 +174,12 @@ public class DoubleLinkedList<E extends Comparable> {
             current = head;
         }
 
+        @Override
         public void first() {
             current = head;
         }
 
+        @Override
         public void last() {
             Node tmp = current;
             while (tmp.next != null) {
@@ -191,6 +193,7 @@ public class DoubleLinkedList<E extends Comparable> {
             return current != null;
         }
 
+        @Override
         public boolean next() {
             if (current == null) {
                 return false;
@@ -213,10 +216,33 @@ public class DoubleLinkedList<E extends Comparable> {
             return current == ((Itr) two).current;
         }
 
+        @Override
         public E get() {
             return current == null ? null : (E) current.data;
         }
 
+        @Override
+        public boolean byIndex(int index) {
+            if (index == 0) {
+                first();
+                return true;
+            }
+            if (index == size - 1) {
+                last();
+                return true;
+            }
+
+            if (index > 0 && index < size - 1) {
+                Node tmp = head;
+                for (int i = 0; i < index; i++) {
+                    tmp = tmp.next;
+                }
+                current = tmp;
+                return true;
+            }
+            current = null;
+            return false;
+        }
 
     }
 

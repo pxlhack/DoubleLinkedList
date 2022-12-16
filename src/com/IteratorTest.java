@@ -1,6 +1,5 @@
 package com;
 
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Vector;
 
@@ -105,16 +104,83 @@ public class IteratorTest {
 
         IteratorFace<Integer> it = list.iterator();
 
+        System.out.println("List before insert");
         System.out.println(list);
+
         it.toIndex(6);
-        it.add(95);
-        System.out.println(list);
+        System.out.println("iterator on index 6:");
         try {
             int data = it.get();
             System.out.println("Data: " + data);
         } catch (NoSuchElementException e) {
             System.out.println("No such element");
         }
+        System.out.println("insert 95 to list");
+        it.add(95);
+
+        System.out.println("List after insert to index 6");
+        System.out.println(list);
+
+        try {
+            int data = it.get();
+            System.out.println("Data from iterator: " + data);
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+        System.out.println();
+
+        it.first();
+
+        System.out.println("List before insert");
+        System.out.println(list);
+
+        System.out.println("iterator on first element:");
+        try {
+            int data = it.get();
+            System.out.println("Data: " + data);
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+        System.out.println("insert 23 to list");
+        it.add(23);
+
+        System.out.println("List after insert to first element");
+        System.out.println(list);
+
+        try {
+            int data = it.get();
+            System.out.println("Data from iterator: " + data);
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+        System.out.println();
+
+        it.last();
+
+        System.out.println("List before insert");
+        System.out.println(list);
+
+        System.out.println("iterator on last element:");
+        try {
+            int data = it.get();
+            System.out.println("Data: " + data);
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+        System.out.println("insert 67 to list");
+        it.add(67);
+
+        System.out.println("List after insert to last element");
+        System.out.println(list);
+
+        try {
+            int data = it.get();
+            System.out.println("Data from iterator: " + data);
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+
+
     }
 
     public void testRemove() {

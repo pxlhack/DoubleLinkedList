@@ -203,8 +203,10 @@ public class IteratorTest {
 
         IteratorFace<Integer> it = list.iterator();
 
-
+        System.out.println("List:");
         System.out.println(list);
+
+        System.out.println("Iterator on index 5");
         it.toIndex(5);
         try {
             int data = it.get();
@@ -213,6 +215,26 @@ public class IteratorTest {
             System.out.println("No such element");
         }
         it.remove();
+        System.out.println("Remove on index 5");
+        System.out.println(list);
+        try {
+            int data = it.get();
+            System.out.println("Data from index 5: " + data);
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+        System.out.println();
+
+        System.out.println("Iterator on first element");
+        it.first();
+        try {
+            int data = it.get();
+            System.out.println("Data: " + data);
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+        it.remove();
+        System.out.println("Remove first element");
         System.out.println(list);
         try {
             int data = it.get();
@@ -220,6 +242,26 @@ public class IteratorTest {
         } catch (NoSuchElementException e) {
             System.out.println("No such element");
         }
+
+        System.out.println("Iterator on last element");
+        it.last();
+        try {
+            int data = it.get();
+            System.out.println("Data: " + data);
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+        it.remove();
+        System.out.println("Remove last element");
+        System.out.println(list);
+        try {
+            int data = it.get();
+            System.out.println("Data: " + data);
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+
+
     }
 
     public void testSeveralIterators() {

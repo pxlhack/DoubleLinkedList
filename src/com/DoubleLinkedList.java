@@ -266,6 +266,7 @@ public class DoubleLinkedList<E extends Comparable> {
                 newNode.next = nextNode;
                 nextNode.prev = newNode;
                 current = current.prev;
+                size++;
             } else {
                 pushFront(data);
                 current = head;
@@ -297,15 +298,25 @@ public class DoubleLinkedList<E extends Comparable> {
 
         @Override
         public void remove() {
-            current.data = null;
-            if (current.prev != null) current.prev.next = current.next;
-            if (current.next != null) current.next.prev = current.prev;
-
-            if (current.next != null) {
+            if (current.prev == null) {
                 current = current.next;
-            } else if (current.prev != null) {
-                current = current.prev;
+                popFront();
+                return;
             }
+
+            if (current.next == null) {
+                current = current.prev;
+                popBack();
+                return;
+            }
+
+            current.data = null;
+            current.prev.next = current.next;
+            current.next.prev = current.prev;
+
+            current = current.next;
+
+            size--;
 
         }
 

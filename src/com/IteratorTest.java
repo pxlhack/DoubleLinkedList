@@ -1,5 +1,8 @@
 package com;
 
+import com.list.DoubleLinkedList;
+import com.list.IteratorFace;
+
 import java.util.NoSuchElementException;
 import java.util.Vector;
 
@@ -118,6 +121,24 @@ public class IteratorTest {
         } catch (NoSuchElementException e) {
             System.out.println("No such element");
         }
+        System.out.println();
+        System.out.println("List before insert");
+        System.out.println(list);
+
+
+        it.toIndex(-3);
+        System.out.println("iterator on index -3:");
+        try {
+            int data = it.get();
+            System.out.println("Data: " + data);
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+        System.out.println("insert 30 to list");
+        it.add(30);
+
+        System.out.println("List after insert to index -3");
+        System.out.println(list);
 
 
     }

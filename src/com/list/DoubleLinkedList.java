@@ -1,4 +1,4 @@
-package com;
+package com.list;
 
 import java.util.NoSuchElementException;
 
@@ -219,36 +219,6 @@ public class DoubleLinkedList<E extends Comparable> {
             return current == ((Itr) two).current;
         }
 
-       /* @Override
-        public boolean add(Comparable data) {
-            if (current == null) {
-                return false;
-            }
-
-            if (current.next == null) {
-                pushBack(data);
-                current = current.next;
-                return true;
-            }
-            if (current.prev == null) {
-                current = current.prev;
-                pushFront(data);
-                return true;
-            }
-
-            if (current.prev != null) {
-                Node newNode = new Node(data);
-                Node nextNode = current.next;
-                current.next = newNode;
-                newNode.prev = current;
-                newNode.next = nextNode;
-                nextNode.prev = newNode;
-
-                current = current.next;
-                return true;
-            }
-            return false;
-        }*/
 
         @Override
         public boolean add(Comparable data) {
@@ -273,26 +243,6 @@ public class DoubleLinkedList<E extends Comparable> {
             }
             return true;
 
-           /* if (current.prev == null) {
-                Node newNode = new Node<>(data);
-                Node nextNode = current;
-
-                current = current.prev;
-                pushFront(data);
-                return true;
-            }
-
-            if (current.prev != null) {
-                Node newNode = new Node(data);
-                Node nextNode = current.next;
-                current.next = newNode;
-                newNode.prev = current;
-                newNode.next = nextNode;
-                nextNode.prev = newNode;
-
-                current = current.next;
-                return true;
-            }*/
         }
 
 

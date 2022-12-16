@@ -1,4 +1,4 @@
-package com;
+package com.list;
 
 public interface IteratorFace<E extends Comparable> {
     public void first();

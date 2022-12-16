@@ -9,12 +9,18 @@ public interface IteratorFace<E extends Comparable> {
 
     public E get();
 
-    public boolean byIndex(int index);
+    public void set(E newData);
+
+    public boolean toIndex(int index);
 
     public boolean next();
 
     public boolean prev();
 
     public boolean equals(IteratorFace two);
+
+    public boolean add(E data);
+
+    public void remove();
 
 }

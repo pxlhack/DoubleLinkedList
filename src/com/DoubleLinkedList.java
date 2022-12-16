@@ -1,5 +1,7 @@
 package com;
 
+import java.util.NoSuchElementException;
+
 public class DoubleLinkedList<E extends Comparable> {
     private int size;
     private Node<E> head;
@@ -9,10 +11,10 @@ public class DoubleLinkedList<E extends Comparable> {
         size = 0;
     }
 
-    public void pushBack(E data) {
+    public void pushBack(Comparable data) {
 
         if (head == null) {
-            head = new Node<>(data);
+            head = new Node(data);
             size = 1;
         } else {
             Node tmp = this.head;
@@ -28,13 +30,13 @@ public class DoubleLinkedList<E extends Comparable> {
 
     }
 
-    public void pushFront(E data) {
+    public void pushFront(Comparable data) {
         if (head == null) {
-            head = new Node<>(data);
+            head = new Node(data);
             size = 1;
         } else {
             Node tmp = this.head;
-            head = new Node<>(data);
+            head = new Node(data);
             head.next = tmp;
             tmp.prev = head;
             size++;
@@ -68,6 +70,7 @@ public class DoubleLinkedList<E extends Comparable> {
             newNode.next = nextNode;
             nextNode.prev = newNode;
             size++;
+
 
         }
     }
@@ -116,9 +119,9 @@ public class DoubleLinkedList<E extends Comparable> {
         return null;
     }
 
-    public void set(int index, E newData) {
+    public void set(int index, Comparable newData) {
         if (index == 0) {
-            head.data = newData;
+            head.data = (E) newData;
         } else {
             if (index > 0 && index < size) {
                 Node tmp = head;
@@ -181,7 +184,7 @@ public class DoubleLinkedList<E extends Comparable> {
 
         @Override
         public void last() {
-            Node tmp = current;
+            Node tmp = head;
             while (tmp.next != null) {
                 tmp = tmp.next;
             }
@@ -217,12 +220,70 @@ public class DoubleLinkedList<E extends Comparable> {
         }
 
         @Override
-        public E get() {
-            return current == null ? null : (E) current.data;
+        public boolean add(Comparable data) {
+            if (current == null) {
+                return false;
+            }
+
+            if (current.next == null) {
+                pushBack(data);
+                current = current.next;
+                return true;
+            }
+            if (current.prev == null) {
+                current = current.prev;
+                pushFront(data);
+                return true;
+            }
+
+            if (current.prev != null) {
+                Node newNode = new Node(data);
+                Node nextNode = current.next;
+                current.next = newNode;
+                newNode.prev = current;
+                newNode.next = nextNode;
+                nextNode.prev = newNode;
+
+                current = current.next;
+                return true;
+            }
+            return false;
         }
 
         @Override
-        public boolean byIndex(int index) {
+        public void remove() {
+            current.data = null;
+            if (current.prev != null) current.prev.next = current.next;
+            if (current.next != null) current.next.prev = current.prev;
+
+            if (current.next != null) {
+                current = current.next;
+            } else if (current.prev != null) {
+                current = current.prev;
+            }
+
+        }
+
+        @Override
+        public E get() {
+            if (current != null) {
+                if (current.data != null) {
+                    return (E) current.data;
+                }
+            }
+
+            throw new NoSuchElementException();
+
+        }
+
+
+        @Override
+        public void set(Comparable newData) {
+            current.data = newData;
+        }
+
+        @Override
+        public boolean toIndex(int index) {
             if (index == 0) {
                 first();
                 return true;

@@ -73,23 +73,30 @@ public class IteratorTest {
     }
 
     public void testSet() {
-        DoubleLinkedList<Integer> doubleLinkedList = new DoubleLinkedList<>();
+        DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
         for (int i = 0; i < 10; i++) {
-            doubleLinkedList.pushBack(i);
+            list.pushBack(i);
         }
+        System.out.println("List:");
+        System.out.println(list);
 
-        IteratorFace<Integer> it = doubleLinkedList.iterator();
+        IteratorFace<Integer> it = list.iterator();
         it.toIndex(4);
+        System.out.println("Iterator on 4 index");
         try {
             int data = it.get();
-            System.out.println("Data: " + data);
+            System.out.println("Data from 4 index: " + data);
         } catch (NoSuchElementException e) {
             System.out.println("No such element");
         }
         it.set(32);
+        System.out.println("set data = 32 for 4 index");
+        System.out.println("List:");
+        System.out.println(list);
+
         try {
             int data = it.get();
-            System.out.println("Data: " + data);
+            System.out.println("Data from 4 index: " + data);
         } catch (NoSuchElementException e) {
             System.out.println("No such element");
         }

@@ -265,21 +265,30 @@ public class IteratorTest {
     }
 
     public void testSeveralIterators() {
-        DoubleLinkedList<Integer> doubleLinkedList = new DoubleLinkedList<>();
+        DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
         for (int i = 0; i < 10; i++) {
-            doubleLinkedList.pushBack(i);
+            list.pushBack(i);
         }
+
+        System.out.println("List:");
+        System.out.println(list);
+
         Vector<IteratorFace<Integer>> itVector = new Vector<>();
         for (int i = 0; i < 3; i++) {
-            IteratorFace<Integer> it = doubleLinkedList.iterator();
+            IteratorFace<Integer> it = list.iterator();
             itVector.add(it);
         }
 
+        System.out.println("set all iterators to 3 index");
         for (IteratorFace<Integer> it : itVector) {
             it.toIndex(3);
         }
-
+        System.out.println("Delete element with first iterator");
         itVector.get(0).remove();
+        System.out.println("List:");
+        System.out.println(list);
+
+        System.out.println("Call the get method from iterators");
 
         for (IteratorFace<Integer> it : itVector) {
             try {
@@ -289,7 +298,6 @@ public class IteratorTest {
                 System.out.println("No such element");
             }
         }
-
 
     }
 }

@@ -4,74 +4,6 @@ import java.util.NoSuchElementException;
 import java.util.Vector;
 
 public class IteratorTest {
-    public void testGet() {
-        DoubleLinkedList<Integer> doubleLinkedList = new DoubleLinkedList<>();
-        for (int i = 0; i < 10; i++) {
-            doubleLinkedList.pushBack(i);
-        }
-
-        IteratorFace<Integer> it = doubleLinkedList.iterator();
-
-        it.first();
-        try {
-            int firstData = it.get();
-            System.out.println("first data: " + firstData);
-        } catch (NoSuchElementException e) {
-            System.out.println("No such element");
-        }
-
-        it.next();
-        try {
-            int nextData = it.get();
-            System.out.println("next data: " + nextData);
-        } catch (NoSuchElementException e) {
-            System.out.println("No such element");
-        }
-
-        it.last();
-        try {
-            int lastData = it.get();
-            System.out.println("last data: " + lastData);
-        } catch (NoSuchElementException e) {
-            System.out.println("No such element");
-        }
-
-        it.prev();
-        try {
-            int prevData = it.get();
-            System.out.println("previous data: " + prevData);
-        } catch (NoSuchElementException e) {
-            System.out.println("No such element");
-        }
-
-        it.toIndex(20);
-        try {
-            int outOfBoundsData = it.get();
-            System.out.println("out of bounds data: " + outOfBoundsData);
-        } catch (NoSuchElementException e) {
-            System.out.println("No such element");
-        }
-
-        it.last();
-        try {
-            it.next();
-            int outOfBoundsData = it.get();
-            System.out.println("out of bounds data: " + outOfBoundsData);
-        } catch (NullPointerException | NoSuchElementException e) {
-            System.out.println("No such element");
-        }
-
-        it.first();
-        try {
-            it.prev();
-            int outOfBoundsData = it.get();
-            System.out.println("out of bounds data: " + outOfBoundsData);
-        } catch (NullPointerException | NoSuchElementException e) {
-            System.out.println("No such element");
-        }
-
-    }
-
     public void testSet() {
         DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
         for (int i = 0; i < 10; i++) {
@@ -187,6 +119,79 @@ public class IteratorTest {
             System.out.println("No such element");
         }
 
+
+    }
+
+    public void testGet() {
+        DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+        for (int i = 0; i < 10; i++) {
+            list.pushBack(i);
+        }
+
+        System.out.println("List:");
+        System.out.println(list);
+        IteratorFace<Integer> it = list.iterator();
+
+        it.first();
+        try {
+            int firstData = it.get();
+            System.out.println("first data: " + firstData);
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+
+        it.next();
+        try {
+            int nextData = it.get();
+            System.out.println("next data: " + nextData);
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+
+        it.last();
+        try {
+            int lastData = it.get();
+            System.out.println("last data: " + lastData);
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+
+        it.prev();
+        try {
+            int prevData = it.get();
+            System.out.println("previous data: " + prevData);
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+
+        it.toIndex(20);
+        System.out.print("Data from 20 index: ");
+        try {
+            int outOfBoundsData = it.get();
+            System.out.println("out of bounds data: " + outOfBoundsData);
+        } catch (NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+
+        System.out.print("Data from next for last element: ");
+        it.last();
+        try {
+            it.next();
+            int outOfBoundsData = it.get();
+            System.out.println("out of bounds data: " + outOfBoundsData);
+        } catch (NullPointerException | NoSuchElementException e) {
+            System.out.println("No such element");
+        }
+
+        System.out.print("Data from previous for first element: ");
+        it.first();
+        try {
+            it.prev();
+            int outOfBoundsData = it.get();
+            System.out.println("out of bounds data: " + outOfBoundsData);
+        } catch (NullPointerException | NoSuchElementException e) {
+            System.out.println("No such element");
+        }
 
     }
 

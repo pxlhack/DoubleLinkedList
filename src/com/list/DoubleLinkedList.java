@@ -1,6 +1,7 @@
 package com.list;
 
 import java.util.NoSuchElementException;
+import java.util.Vector;
 
 public class DoubleLinkedList<E extends Comparable> {
     private int size;
@@ -8,7 +9,8 @@ public class DoubleLinkedList<E extends Comparable> {
 
     public DoubleLinkedList() {
         this.head = null;
-        size = 0;
+        this.size = 0;
+        this.iteratorVector = new Vector<>();
     }
 
     public void pushBack(Comparable data) {
@@ -134,7 +136,9 @@ public class DoubleLinkedList<E extends Comparable> {
     }
 
     public Itr<E> iterator() {
-        return new Itr<>();
+        Itr<E> it = new Itr<>();
+        iteratorVector.add(it);
+        return it;
     }
 
     private void unlink(Node x) {
@@ -247,7 +251,15 @@ public class DoubleLinkedList<E extends Comparable> {
 
 
         @Override
-        public void remove() {
+        public void remove() throws Throwable {
+            for (Itr it : iteratorVector) {
+                if (it != this) {
+                    if (it.current == this.current) {
+                        throw new Throwable("Deletion error!\nIterator is set on the node");
+                    }
+                }
+            }
+
             if (current.prev == null) {
                 current = current.next;
                 popFront();
@@ -312,6 +324,9 @@ public class DoubleLinkedList<E extends Comparable> {
         }
 
     }
+
+
+    private Vector<Itr> iteratorVector;
 
     @Override
     public String toString() {

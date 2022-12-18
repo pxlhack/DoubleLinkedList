@@ -222,6 +222,7 @@ public class IteratorTest {
             list.pushBack(i);
         }
 
+
         IteratorFace<Integer> it = list.iterator();
 
         System.out.println("List:");
@@ -235,7 +236,12 @@ public class IteratorTest {
         } catch (NoSuchElementException e) {
             System.out.println("No such element");
         }
-        it.remove();
+
+        try {
+            it.remove();
+        } catch (Throwable e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println("Remove on index 5");
         System.out.println(list);
         try {
@@ -254,7 +260,11 @@ public class IteratorTest {
         } catch (NoSuchElementException e) {
             System.out.println("No such element");
         }
-        it.remove();
+        try {
+            it.remove();
+        } catch (Throwable e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println("Remove first element");
         System.out.println(list);
         try {
@@ -272,7 +282,11 @@ public class IteratorTest {
         } catch (NoSuchElementException e) {
             System.out.println("No such element");
         }
-        it.remove();
+        try {
+            it.remove();
+        } catch (Throwable e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println("Remove last element");
         System.out.println(list);
         try {
@@ -305,7 +319,23 @@ public class IteratorTest {
             it.toIndex(3);
         }
         System.out.println("Delete element with first iterator");
-        itVector.get(0).remove();
+
+        try {
+            itVector.get(0).remove();
+        } catch (Throwable e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("Set first iterator to first\n" +
+                "Set second iterator to last\n" +
+                "Delete the node on which the third iterator setted");
+        itVector.get(0).first();
+        itVector.get(1).last();
+        try {
+            itVector.get(2).remove();
+        } catch (Throwable e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println("List:");
         System.out.println(list);
 

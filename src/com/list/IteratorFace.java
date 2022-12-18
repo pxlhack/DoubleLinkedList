@@ -21,6 +21,6 @@ public interface IteratorFace<E extends Comparable> {
 
     public boolean add(E data);
 
-    public void remove();
+    public void remove() throws Throwable;
 
 }
